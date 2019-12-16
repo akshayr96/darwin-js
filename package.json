@@ -1,0 +1,24 @@
+{
+  "name": "darwin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshayr96/darwin-js.git"
+  },
+  "author": "Akshay Ramesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshayr96/darwin-js/issues"
+  },
+  "homepage": "https://github.com/akshayr96/darwin-js#readme",
+  "dependencies": {
+    "parcel": "^1.12.4"
+  }
+}

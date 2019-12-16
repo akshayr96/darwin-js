@@ -1,0 +1,24 @@
+body{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: #171717;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+a{
+	color: #00b9ff;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+.credits{
+	position: absolute;
+	right: 10px;
+	bottom: 3vh;
+	color: white;
+	font-family: sans-serif;
+	font-size: 12px;
+}
