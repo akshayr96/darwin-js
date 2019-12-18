@@ -11,7 +11,7 @@ export default class Monsters {
 
 	update(){
 		this.monsters.forEach(monster => {
-			let updatedCoordinates;
+			let updatedCoordinates
 			if(this.steps % 30 == 0 || !monster.direction){
 				updatedCoordinates = this.getNextStep(monster, null)
 				monster.direction = updatedCoordinates.direction
@@ -27,8 +27,8 @@ export default class Monsters {
 	draw(ctx){
 		this.monsters.forEach(monster => {
 			const { x, y } = monster.position
-			ctx.fillStyle = monster.color;
-			ctx.fillRect(x, y, monster.size, monster.size);
+			ctx.fillStyle = monster.color
+			ctx.fillRect(x, y, monster.size, monster.size)
 		})
 	}
 
