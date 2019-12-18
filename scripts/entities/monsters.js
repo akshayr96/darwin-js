@@ -3,7 +3,7 @@ export default class Monsters {
 		this.steps = 0
 		this.monsters = [{
 			size: 30,
-			speed: 5,
+			speed: 3,
 			senses: 10,
 			color: '#ccc',
 			position: {x: 50, y: 50},
@@ -13,7 +13,7 @@ export default class Monsters {
 
 	update(){
 		this.monsters.forEach(monster => {
-			if(this.steps % 10 == 0 || !monster.direction){
+			if(this.steps % 30 == 0 || !monster.direction){
 				monster.direction = Math.random() * 2 * Math.PI
 			}
 			monster.position.x = monster.position.x + (monster.speed * Math.cos(monster.direction))
