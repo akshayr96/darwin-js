@@ -1,12 +1,21 @@
 import config from "./statics/config"
+import Entities from "./entities"
+import { initializeCanvas, wipeFrameClean } from "./utils"
 
-let canvas = document.getElementById('game')
-let ctx = canvas.getContext('2d')
-canvas.width = config.game.width
-canvas.height = config.game.height
+const { width, height } = config.game
 
-console.log(canvas.width, canvas.height)
+//canvas init
+const rootElement = document.getElementById('game')
+const ctx = initializeCanvas(width, height, rootElement)
 
-ctx.clearRect(0, 0, canvas.width, canvas.height)
-ctx.fillStyle = "#fff";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+//entities init
+const entities = new Entities(config, ctx)
+
+//Main Loop
+const gameLoop = () => {
+	wipeFrameClean(ctx, width, height)
+	entities.renderFrame()
+	requestAnimationFrame(gameLoop)
+}
+
+requestAnimationFrame(gameLoop)
