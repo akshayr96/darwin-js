@@ -6,7 +6,7 @@ export default class Monsters {
 			speed: 3,
 			senses: 10,
 			color: '#ccc',
-			position: {x: 50, y: 50},
+			position: { x: 200, y: 200 },
 			direction: null
 		}]
 	}
