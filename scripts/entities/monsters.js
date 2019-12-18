@@ -3,10 +3,11 @@ export default class Monsters {
 		this.config = config
 		this.steps = 0
 		this.monsters = [
-			this.createMonster(30, 5, 10, '#ff0000'),
-			this.createMonster(30, 5, 10, '#0000ff'),
-			this.createMonster(30, 5, 10, '#00ff00')
+			this.createMonster(50, 7, 10, '#ff0000'),
+			this.createMonster(55, 5, 10, '#0000ff'),
+			this.createMonster(60, 3, 10, '#00ff00')
 		]
+		this.image = document.getElementById('monster')
 	}
 
 	update(){
@@ -27,8 +28,9 @@ export default class Monsters {
 	draw(ctx){
 		this.monsters.forEach(monster => {
 			const { x, y } = monster.position
-			ctx.fillStyle = monster.color
-			ctx.fillRect(x, y, monster.size, monster.size)
+			// ctx.fillStyle = monster.color
+			// ctx.fillRect(x, y, monster.size, monster.size)
+			ctx.drawImage(this.image, 0, 0, 50, 50, x, y, monster.size, monster.size);
 		})
 	}
 
