@@ -7,6 +7,6 @@ export const initializeCanvas = (width, height, canvas) => {
 
 export const wipeFrameClean = (ctx, width, height) => {
 	ctx.clearRect(0, 0, width, height)
-	ctx.fillStyle = "#fff";
+	ctx.fillStyle = "#00A503";
 	ctx.fillRect(0, 0, width, height);
 }
