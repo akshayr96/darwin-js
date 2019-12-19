@@ -2,6 +2,11 @@ export default class Monsters {
 	constructor(config){
 		this.config = config
 		this.steps = 0
+		this.states = {
+			HUNGRY: 'HUNGRY',
+			TIERD: 'TIERD',
+			REST: 'REST'
+		}
 		this.monsters = [
 			this.createMonster(60, 5, 10, '#ff0000'),
 			this.createMonster(60, 5, 10, '#0000ff'),
@@ -35,13 +40,15 @@ export default class Monsters {
 	}
 
 	createMonster(size, speed, senses, color){
+		const state = this.states.HUNGRY
 		return {
 			size,
 			speed,
 			senses,
 			color,
 			position: { x: 1, y: 1 },
-			direction: null
+			direction: null,
+			state
 		}
 	}
 
