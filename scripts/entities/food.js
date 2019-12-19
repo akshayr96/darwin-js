@@ -1,7 +1,11 @@
+import { getRandomArbitrary } from "./../utils"
+
 export default class Food {
 	constructor(config){
 		this.config = config
+		this.radius = 5
 		this.coordinates = this.generateRandomCoordinates()
+		this.color = '#e94b5a'
 	}
 
 	update(){
@@ -11,17 +15,18 @@ export default class Food {
 	draw(ctx){
 		this.coordinates.forEach(coordinate => {
 			ctx.beginPath();
-      ctx.arc(coordinate.x, coordinate.y, 5, 0, 2 * Math.PI, false);
-      ctx.fillStyle = 'yellow';
-      ctx.fill();
+      ctx.arc(coordinate.x, coordinate.y, this.radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle = this.color;
+			ctx.fill();
+			ctx.stroke();
 		})
 	}
 
 	generateRandomCoordinates(){
 		const coordinates = []
 		for(var i = 0; i < this.config.food.coeffecient; i++){
-			const x = Math.trunc(Math.random() * this.config.game.width)
-			const y = Math.trunc(Math.random() * this.config.game.height)
+			const x = getRandomArbitrary(this.radius, this.config.game.width)
+			const y = getRandomArbitrary(this.radius, this.config.game.height)
 			coordinates.push({ x, y })
 		}
 		return coordinates

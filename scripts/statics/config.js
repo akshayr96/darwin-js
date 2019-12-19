@@ -1,7 +1,7 @@
 export default {
 	game: {
-		width: 500,
-		height: 500
+		width: 700,
+		height: 700
 	},
 	food:{
 		coeffecient: 10 

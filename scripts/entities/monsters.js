@@ -1,3 +1,4 @@
+import { getRandomArbitrary } from "./../utils"
 export default class Monsters {
 	constructor(config){
 		this.config = config
@@ -8,11 +9,11 @@ export default class Monsters {
 			REST: 'REST'
 		}
 		this.monsters = [
-			this.createMonster(60, 5, 10, '#ff0000'),
-			this.createMonster(60, 5, 10, '#0000ff'),
-			this.createMonster(60, 5, 10, '#00ff00'),
-			this.createMonster(60, 5, 10, '#0000ff'),
-			this.createMonster(60, 5, 10, '#00ff00')
+			this.createMonster(35, 3, 10, '#ff0000'),
+			this.createMonster(35, 3, 10, '#0000ff'),
+			this.createMonster(35, 3, 10, '#00ff00'),
+			this.createMonster(35, 3, 10, '#0000ff'),
+			this.createMonster(35, 3, 10, '#00ff00')
 		]
 		this.image = document.getElementById("monster")
 	}
@@ -20,7 +21,7 @@ export default class Monsters {
 	update(){
 		this.monsters.forEach(monster => {
 			let updatedCoordinates
-			if(this.steps % 30 == 0 || !monster.direction){
+			if(this.steps % monster.whim == 0 || !monster.direction){
 				updatedCoordinates = this.getNextStep(monster, null)
 				monster.direction = updatedCoordinates.direction
 			}else{
@@ -48,7 +49,8 @@ export default class Monsters {
 			color,
 			position: { x: 1, y: 1 },
 			direction: null,
-			state
+			state,
+			whim: getRandomArbitrary(30, 50)
 		}
 	}
 
