@@ -20,15 +20,12 @@ export default class Monsters {
 
 	update(){
 		this.monsters.forEach(monster => {
-			let updatedCoordinates
-			if(this.steps % monster.whim == 0 || !monster.direction){
-				updatedCoordinates = this.getNextStep(monster, null)
-				monster.direction = updatedCoordinates.direction
-			}else{
-				updatedCoordinates = this.getNextStep(monster, monster.direction)
+			if(monster.state == this.states.HUNGRY && this.steps % monster.whim == 0){
+				monster.direction = null
 			}
-			monster.position.x = updatedCoordinates.x 
-			monster.position.y = updatedCoordinates.y
+			const { direction, x, y } = this.getNextStep(monster, monster.direction)
+			monster.direction = direction
+			monster.position = { x, y }
 		})
 		this.steps++
 	}
@@ -50,6 +47,7 @@ export default class Monsters {
 			position: { x: 1, y: 1 },
 			direction: null,
 			state,
+			target: null,
 			whim: getRandomArbitrary(30, 50)
 		}
 	}
