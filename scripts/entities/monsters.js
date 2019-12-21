@@ -1,4 +1,5 @@
 import { getRandomArbitrary } from "./../utils"
+
 export default class Monsters {
 	constructor(config){
 		this.config = config
