@@ -1,26 +1,31 @@
+import { getRandomArbitrary } from "./../utils"
 export default class Monsters {
 	constructor(config){
 		this.config = config
 		this.steps = 0
+		this.states = {
+			HUNGRY: 'HUNGRY',
+			TIERD: 'TIERD',
+			REST: 'REST'
+		}
 		this.monsters = [
-			this.createMonster(50, 7, 10, '#ff0000'),
-			this.createMonster(55, 5, 10, '#0000ff'),
-			this.createMonster(60, 3, 10, '#00ff00')
+			this.createMonster(35, 3, 10, '#ff0000'),
+			this.createMonster(35, 3, 10, '#0000ff'),
+			this.createMonster(35, 3, 10, '#00ff00'),
+			this.createMonster(35, 3, 10, '#0000ff'),
+			this.createMonster(35, 3, 10, '#00ff00')
 		]
-		this.image = document.getElementById('monster')
+		this.image = document.getElementById("monster")
 	}
 
 	update(){
 		this.monsters.forEach(monster => {
-			let updatedCoordinates
-			if(this.steps % 30 == 0 || !monster.direction){
-				updatedCoordinates = this.getNextStep(monster, null)
-				monster.direction = updatedCoordinates.direction
-			}else{
-				updatedCoordinates = this.getNextStep(monster, monster.direction)
+			if(monster.state == this.states.HUNGRY && this.steps % monster.whim == 0){
+				monster.direction = null
 			}
-			monster.position.x = updatedCoordinates.x 
-			monster.position.y = updatedCoordinates.y
+			const { direction, x, y } = this.getNextStep(monster, monster.direction)
+			monster.direction = direction
+			monster.position = { x, y }
 		})
 		this.steps++
 	}
@@ -28,20 +33,22 @@ export default class Monsters {
 	draw(ctx){
 		this.monsters.forEach(monster => {
 			const { x, y } = monster.position
-			// ctx.fillStyle = monster.color
-			// ctx.fillRect(x, y, monster.size, monster.size)
 			ctx.drawImage(this.image, 0, 0, 50, 50, x, y, monster.size, monster.size);
 		})
 	}
 
 	createMonster(size, speed, senses, color){
+		const state = this.states.HUNGRY
 		return {
 			size,
 			speed,
 			senses,
 			color,
 			position: { x: 1, y: 1 },
-			direction: null
+			direction: null,
+			state,
+			target: null,
+			whim: getRandomArbitrary(30, 50)
 		}
 	}
 
