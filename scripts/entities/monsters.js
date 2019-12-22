@@ -10,11 +10,11 @@ export default class Monsters {
 			REST: 'REST'
 		}
 		this.monsters = [
-			this.createMonster(35, 3, 10, '#ff0000'),
-			this.createMonster(35, 3, 10, '#0000ff'),
-			this.createMonster(35, 3, 10, '#00ff00'),
-			this.createMonster(35, 3, 10, '#0000ff'),
-			this.createMonster(35, 3, 10, '#00ff00')
+			this.createMonster(35, 3, 100, '#ff0000'),
+			this.createMonster(35, 3, 100, '#0000ff'),
+			this.createMonster(35, 3, 100, '#00ff00'),
+			this.createMonster(35, 3, 100, '#0000ff'),
+			this.createMonster(35, 3, 100, '#00ff00')
 		]
 		this.image = document.getElementById("monster")
 	}
@@ -34,6 +34,19 @@ export default class Monsters {
 	draw(ctx){
 		this.monsters.forEach(monster => {
 			const { x, y } = monster.position
+
+			//Senses field circle
+			ctx.beginPath();
+			ctx.arc(x + monster.size / 2 , y + monster.size / 2, monster.senses, 0, 2 * Math.PI, false);
+			ctx.stroke();
+
+			if(monster.target){
+				// target food pointer
+				ctx.beginPath();
+				ctx.arc(monster.target.x , monster.target.y, 10, 0, 2 * Math.PI, false);
+				ctx.stroke();
+			}
+			
 			ctx.drawImage(this.image, 0, 0, 50, 50, x, y, monster.size, monster.size);
 		})
 	}
@@ -80,5 +93,14 @@ export default class Monsters {
 		const leftOfMonster = y
 		const rightOfMonster = y + size
 		return { topOfMonster, bottomOfMonster, leftOfMonster, rightOfMonster }
+	}
+
+	checkMonstersReach(itemCoordinate, monster){
+		const { position: { x, y }, size } = monster
+		const { topOfMonster, bottomOfMonster, leftOfMonster, rightOfMonster } = this.getMonsterContour(x, y, size)
+		return (
+			(itemCoordinate.x > leftOfMonster && itemCoordinate.x < rightOfMonster) && 
+			(itemCoordinate.y > topOfMonster && itemCoordinate.y < bottomOfMonster)
+		)
 	}
 }

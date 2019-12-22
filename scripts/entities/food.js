@@ -13,14 +13,12 @@ export default class Food {
 	}
 
 	draw(ctx){
-		Object.keys(this.coordinates).forEach(x => {
-			this.coordinates[x].forEach(y => {
-				ctx.beginPath();
-				ctx.arc(x, y, this.radius, 0, 2 * Math.PI, false);
-				ctx.fillStyle = this.color;
-				ctx.fill();
-				ctx.stroke();
-			})
+		this.forEveryFood(({ x, y })=>{
+			ctx.beginPath();
+			ctx.arc(x, y, this.radius, 0, 2 * Math.PI, false);
+			ctx.fillStyle = this.color;
+			ctx.fill();
+			ctx.stroke();
 		})
 	}
 
@@ -32,5 +30,13 @@ export default class Food {
 			coordinates[x] = coordinates[x] ? coordinates[x].concat(y) : [y]  
 		}
 		return coordinates
+	}
+
+	forEveryFood(callback){
+		Object.keys(this.coordinates).forEach(x => {
+			this.coordinates[x].forEach(y => {
+				callback({ x, y })
+			})
+		})
 	}
 }
