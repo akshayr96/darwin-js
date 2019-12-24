@@ -4,7 +4,7 @@ export default class CollisionEngine {
 		this.food = food
 	}
 
-	handleCollisions(){
+	handleCollisions2(){
 		this.monsters.monsters.forEach(monster => {
 			monster.target = null
 			const { x: x1, y: y1 } = monster.position
@@ -18,9 +18,32 @@ export default class CollisionEngine {
 			})
 		})
 	}
-}
 
-/**
- * x = distance cosT
- * y = distance sinT
- */
+	handleCollisions(){
+		this.monsters.monsters.forEach(monster => {
+			if(monster.state = this.monsters.states.HUNGRY){
+				const { target, position: { x: monsterX, y: monsterY } } = monster
+				console.log(target)
+				if(target){
+					debugger;
+				}
+				if(target && this.food.coordinates[target.x].includes(y)){
+					return
+				}else{
+					//Monster hungty and targetless
+					this.food.forEveryFood(foodCoordinate => {
+						const { x: foodX, y: foodY } = foodCoordinate
+						const distance = Math.sqrt(Math.pow((foodX - monsterX), 2) + Math.pow((foodY - monsterY), 2))
+						if(distance < monster.senses && (!monster.target || monster.target.distance > distance)){
+							monster.direction = Math.trunc(Math.acos((foodX - monsterX)/distance) * (180 / Math.PI))
+							monster.target = { x: foodX, y: foodY, distance }
+						}
+					})
+
+				}
+			}else{
+				// other states handler
+			}
+		})
+	}
+}

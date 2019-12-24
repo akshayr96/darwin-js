@@ -11,10 +11,10 @@ export default class Monsters {
 		}
 		this.monsters = [
 			this.createMonster(35, 3, 100, '#ff0000'),
-			this.createMonster(35, 3, 100, '#0000ff'),
-			this.createMonster(35, 3, 100, '#00ff00'),
-			this.createMonster(35, 3, 100, '#0000ff'),
-			this.createMonster(35, 3, 100, '#00ff00')
+			// this.createMonster(35, 3, 100, '#0000ff'),
+			// this.createMonster(35, 3, 100, '#00ff00'),
+			// this.createMonster(35, 3, 100, '#0000ff'),
+			// this.createMonster(35, 3, 100, '#00ff00')
 		]
 		this.image = document.getElementById("monster")
 	}
