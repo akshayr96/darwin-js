@@ -11,17 +11,17 @@ export default class Monsters {
 		}
 		this.monsters = [
 			this.createMonster(35, 3, 100, '#ff0000'),
-			this.createMonster(35, 3, 100, '#0000ff'),
-			this.createMonster(35, 3, 100, '#00ff00'),
-			this.createMonster(35, 3, 100, '#0000ff'),
-			this.createMonster(35, 3, 100, '#00ff00')
+			// this.createMonster(35, 3, 100, '#0000ff'),
+			// this.createMonster(35, 3, 100, '#00ff00'),
+			// this.createMonster(35, 3, 100, '#0000ff'),
+			// this.createMonster(35, 3, 100, '#00ff00')
 		]
 		this.image = document.getElementById("monster")
 	}
 
 	update(){
 		this.monsters.forEach(monster => {
-			if(monster.state == this.states.HUNGRY && this.steps % monster.whim == 0){
+			if(monster.state == this.states.HUNGRY && !monster.target && this.steps % monster.whim == 0){
 				monster.direction = null
 			}
 			const { direction, x, y } = this.getNextStep(monster, monster.direction)
@@ -92,7 +92,8 @@ export default class Monsters {
 		const bottomOfMonster = x + size
 		const leftOfMonster = y
 		const rightOfMonster = y + size
-		return { topOfMonster, bottomOfMonster, leftOfMonster, rightOfMonster }
+		const centerOfMonster = { x: x + (size / 2), y: y + (size / 2) }
+		return { topOfMonster, bottomOfMonster, leftOfMonster, rightOfMonster, centerOfMonster }
 	}
 
 	checkMonstersReach(itemCoordinate, monster){

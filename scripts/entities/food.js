@@ -27,16 +27,23 @@ export default class Food {
 		for(var i = 0; i < this.config.food.coeffecient; i++){
 			const x = getRandomArbitrary(this.radius, this.config.game.width)
 			const y = getRandomArbitrary(this.radius, this.config.game.height)
-			coordinates[x] = coordinates[x] ? coordinates[x].concat(y) : [y]  
+			coordinates[x] = coordinates[x] ? coordinates[x] : {}
+			coordinates[x][y] = true
 		}
 		return coordinates
 	}
 
 	forEveryFood(callback){
 		Object.keys(this.coordinates).forEach(x => {
-			this.coordinates[x].forEach(y => {
-				callback({ x, y })
-			})
+			Object.keys(this.coordinates[x])
+				.filter(y => this.coordinates[x][y])
+				.forEach(y => {
+					callback({ x, y })
+				})
 		})
+	}
+
+	consumeFood(x, y){
+		this.coordinates[x][y] = false
 	}
 }
